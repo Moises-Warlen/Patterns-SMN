@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Patterns.Models.Usuario>
+
+<h2>Lista de Usuários</h2>
+<a asp-action="Create" class="btn btn-success">Adicionar Novo</a>
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Admin?</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <td>@usuario.nome</td>
+                <td>@usuario.email</td>
+                <td>@(usuario.ind_admin ? "Sim" : "Não")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@usuario.cod_usuario" class="btn btn-primary">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
