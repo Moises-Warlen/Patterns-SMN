@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vbMxw8SMMLyERluNPT3ijzXVkuBHgLu820j4jCeYK/iUh5pFuyjaPMIX/2DihQyi4k7waPFEQnJ9TegOo90H2w==",
+  "dgSpecHash": "mCbaOpLYGWNnFNZtH6q5Z/lY3u2C3llrV2wy9LjQ7E5L7RGA/cYJuA2pVMhBGwIGsQrMyg/En1P8IF+QRdSHkw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Moises\\Desktop\\Patterns\\Patterns.csproj",
+  "projectFilePath": "C:\\Users\\Moises\\Desktop\\Patterns-SMN\\Patterns\\Patterns.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Moises\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Moises\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\5.0.0\\microsoft.aspnetcore.diagnostics.entityframeworkcore.5.0.0.nupkg.sha512",

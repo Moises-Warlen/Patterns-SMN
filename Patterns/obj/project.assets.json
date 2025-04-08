@@ -1545,11 +1545,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Moises\\Desktop\\Patterns\\Patterns.csproj",
+      "projectUniqueName": "C:\\Users\\Moises\\Desktop\\Patterns-SMN\\Patterns\\Patterns.csproj",
       "projectName": "Patterns",
-      "projectPath": "C:\\Users\\Moises\\Desktop\\Patterns\\Patterns.csproj",
+      "projectPath": "C:\\Users\\Moises\\Desktop\\Patterns-SMN\\Patterns\\Patterns.csproj",
       "packagesPath": "C:\\Users\\Moises\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Moises\\Desktop\\Patterns\\obj\\",
+      "outputPath": "C:\\Users\\Moises\\Desktop\\Patterns-SMN\\Patterns\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Moises\\AppData\\Roaming\\NuGet\\NuGet.Config",
