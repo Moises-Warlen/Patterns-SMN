@@ -26,7 +26,8 @@
             <div class="menu-toggle" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </div>
-            <div class="menu-item" onclick="toggleSubmenu(this)"><i class="fas fa-home"></i> <span>Página Inicial</span></div>
+            <div class="menu-item" onclick="toggleSubmenu(this)">  <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i> <span>Página Inicial</span></a></div>
+            <div class="menu-item" onclick="toggleSubmenu(this)">  <a href="@Url.Action("GridUsuario", "Usuario")"> <i class="fas fa-user"></i> <span>Usuarios</span></a></div>
             <div class="submenu"></div>
             <div class="menu-item" onclick="toggleSubmenu(this)"><i class="fas fa-database"></i> <span>SQL</span></div>
 

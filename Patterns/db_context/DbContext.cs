@@ -15,15 +15,18 @@ namespace Patterns.db_context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.ToTable("Usuario");
                 entity.HasKey(e => e.cod_usuario);
-                entity.Property(e => e.nome).IsRequired().HasMaxLength(100);
-                entity.Property(e => e.email).IsRequired().HasMaxLength(100);
-                entity.Property(e => e.ind_admin);
+
+                entity.Property(e => e.cod_usuario).HasColumnName("cod_usuario");
+                entity.Property(e => e.Nome).IsRequired().HasMaxLength(100).HasColumnName("nome");
+                entity.Property(e => e.email).IsRequired().HasMaxLength(100).HasColumnName("email");
+                entity.Property(e => e.ind_admin).HasColumnName("ind_admin");
+                entity.Property(e => e.Senha).HasColumnName("senha");
             });
+
 
             modelBuilder.Entity<Assunto>(entity =>
             {

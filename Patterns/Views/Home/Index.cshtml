@@ -1,19 +1,36 @@
-﻿
-@{ Layout = null; }
-@using System.Linq
-@model IEnumerable<Patterns.Models.Usuario>
+﻿@{
+    ViewData["Title"] = "Página Inicial";
+}
 
-<h2>Lista de Usuários</h2>
-<a asp-action="Create" class="btn btn-success">Adicionar Novo</a>
-<table class="table table-bordered mt-3">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Admin</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<div class="container-fluid py-5 px-3 px-md-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="card shadow-lg rounded-4 p-4 bg-light">
+                <h1 class="mb-4 text-center">Bem-vindo ao <span class="text-primary">Patterns Momentum - SMN</span></h1>
+
+                <p class="lead">
+                    <strong>Patterns Momentum - SMN </strong> é uma plataforma colaborativa dedicada ao estudo, compartilhamento e organização de <strong>padrões de projeto</strong> em desenvolvimento de software.
+                </p>
+
+                <p>
+                    Desenvolvedores podem publicar conteúdos técnicos categorizados por <strong>assunto</strong> e <strong>subitem</strong>, promovendo aprendizado contínuo e discussão de boas práticas.
+                </p>
+
+                <h5 class="mt-4">🔧 Funcionalidades principais</h5>
+                <ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item">✅ Cadastro e login com autenticação segura</li>
+                    <li class="list-group-item">✅ Postagens técnicas organizadas por categorias</li>
+                    <li class="list-group-item">✅ Aprovação manual de conteúdos por administradores</li>
+                    <li class="list-group-item">✅ Notificações por e-mail para moderação</li>
+                    <li class="list-group-item">✅ Interface responsiva com navegação por menu lateral</li>
+                </ul>
+
+                <p class="text-muted">
+                    Todos os conteúdos passam por curadoria para manter a qualidade e confiabilidade das informações.
+                </p>
+
+                
+            </div>
+        </div>
+    </div>
+</div>

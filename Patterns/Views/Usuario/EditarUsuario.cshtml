@@ -1,21 +1,38 @@
 ﻿@model Patterns.Models.Usuario
+@{
+    ViewData["Title"] = "Editar Usuário";
+}
 
-<h2>Editar Usuário</h2>
+<h2 class="mb-4 text-center">Editar Usuário</h2>
 
-<form asp-action="Edit" method="post">
+<form asp-action="Edit" method="post" class="mx-auto" style="max-width: 500px;">
     <input type="hidden" asp-for="cod_usuario" />
-    <div class="form-group">
-        <label>Nome</label>
-        <input asp-for="nome" class="form-control" />
+
+    <div class="mb-3">
+        <label asp-for="Nome" class="form-label"></label>
+        <input asp-for="Nome" class="form-control" />
+        <span asp-validation-for="Nome" class="text-danger small"></span>
     </div>
-    <div class="form-group">
-        <label>Email</label>
+
+    <div class="mb-3">
+        <label asp-for="email" class="form-label"></label>
         <input asp-for="email" class="form-control" />
+        <span asp-validation-for="email" class="text-danger small"></span>
     </div>
-    <div class="form-group">
-        <label>É Admin?</label>
-        <input asp-for="ind_admin" type="checkbox" />
+
+    <div class="mb-3">
+        <label asp-for="Senha" class="form-label">Nova Senha (opcional)</label>
+        <input asp-for="Senha" type="password" class="form-control" />
+        <span asp-validation-for="Senha" class="text-danger small"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Atualizar</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+
+    <div class="form-check mb-3">
+        <input asp-for="ind_admin" class="form-check-input" />
+        <label asp-for="ind_admin" class="form-check-label">É administrador?</label>
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </div>
 </form>

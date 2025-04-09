@@ -4,6 +4,9 @@ using Patterns.Models;
 using Patterns.db_context;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Text;
+using System;
 
 namespace Patterns.Controllers
 {
@@ -16,46 +19,50 @@ namespace Patterns.Controllers
             _context = context;
         }
 
-        // GET: Usuario
+        // GET: /Usuario
         public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+
+        // GET: Lista separada
+        public async Task<IActionResult> GridUsuario()
         {
             var usuarios = await _context.Usuario.ToListAsync();
             return View(usuarios);
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetUsuariosJson()
-        {
-            var usuarios = await _context.Usuario.ToListAsync();
-            return Json(usuarios);
-        }
-
-
-     
-
-
-
-        // GET: Usuario/Create
+        // GET: Formulário de criação
         public IActionResult Create()
         {
-            return View();
+            return View("AdicionarUsuario");
         }
 
-        // POST: Usuario/Create
+        // POST: Criar usuário
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("cod_usuario,nome,email,ind_admin")] Usuario usuario)
+        public async Task<IActionResult> Create(Usuario usuario)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View("AdicionarUsuario", usuario);
             }
-            return View(usuario);
+
+            if (string.IsNullOrWhiteSpace(usuario.Senha))
+            {
+                ModelState.AddModelError("Senha", "A senha é obrigatória.");
+                return View("AdicionarUsuario", usuario);
+            }
+
+            // Criptografar a senha antes de salvar
+            usuario.Senha = GerarHash(usuario.Senha);
+
+            _context.Add(usuario);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: Usuario/Edit/5
+        // GET: Editar usuário
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -63,33 +70,59 @@ namespace Patterns.Controllers
             var usuario = await _context.Usuario.FindAsync(id);
             if (usuario == null) return NotFound();
 
-            return View(usuario);
+            return View("EditarUsuario", usuario);
         }
 
-        // POST: Usuario/Edit/5
+        // POST: Salvar edição
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("cod_usuario,nome,email,ind_admin")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, Usuario usuario)
         {
             if (id != usuario.cod_usuario) return NotFound();
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(usuario);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!_context.Usuario.Any(e => e.cod_usuario == id))
-                        return NotFound();
-                    else
-                        throw;
-                }
-                return RedirectToAction(nameof(Index));
+                return View("EditarUsuario", usuario);
             }
-            return View(usuario);
+
+            try
+            {
+                var usuarioBanco = await _context.Usuario.AsNoTracking()
+                    .FirstOrDefaultAsync(u => u.cod_usuario == id);
+
+                // Se nova senha for informada, criptografa; senão, mantém a antiga
+                if (!string.IsNullOrWhiteSpace(usuario.Senha))
+                {
+                    usuario.Senha = GerarHash(usuario.Senha);
+                }
+                else
+                {
+                    usuario.Senha = usuarioBanco?.Senha;
+                }
+
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Usuario.Any(e => e.cod_usuario == id))
+                    return NotFound();
+                else
+                    throw;
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // Criptografia SHA256
+        private string GerarHash(string senha)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var bytes = Encoding.UTF8.GetBytes(senha);
+                var hash = sha256.ComputeHash(bytes);
+                return BitConverter.ToString(hash).Replace("-", "").ToLower();
+            }
         }
     }
 }
